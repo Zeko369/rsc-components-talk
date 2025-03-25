@@ -2,24 +2,33 @@
 title: Packaged RSCs
 drawings:
   persist: false
+# theme: geist
 # slide transition: https://sli.dev/guide/animations.html#slide-transitions
 # transition: slide-left
 # enable MDC Syntax: https://sli.dev/features/mdc
 mdc: true
 ---
 
-# RSCs as "shippable" fullstack modules
+# RSCs as "shippable" fullstack components
 
----
+Fran Zekan | @Zeko369
+
+<!-- ---
 
 # Hi
+
+<li v-click>Engineer from Croatia</li>
+
+<li v-click>Work for Unidy</li>
+
+<li v-click>Do triathlons (see ya'll for the run tomorrow)</li> -->
 
 ---
 layout: center
 class: text-center
 ---
 
-# "Shippable" "fullstack" "modules"
+# "Shippable" "fullstack" "components"
 
 <!-- <div class="mt-12!" v-click>
 
@@ -28,21 +37,28 @@ class: text-center
 </div> -->
 
 ---
+layout: image
+image: /assets/bootstrap.png
+backgroundSize: 70%
+backgroundPosition: center
+class: object-contain
+---
 
-# "Shippable" "fullstack" "modules"
+<!-- # "Shippable" "fullstack" "components" -->
 
-<img src="./assets/bootstrap.png">
+<!-- <img src="/assets/bootstrap.png"> -->
 
 ---
 disabled: true
 ---
 
-# Packaging? Modules? What?
+# Packaging? What?
 
 "wp-plugins with a bunch of git changes"
 
 ---
 layout: center
+disabled: true
 ---
 
 # Yeah... not the most ideal
@@ -54,8 +70,6 @@ layout: center
 # "component"
 
 ---
-
-# "component"
 
 ````md magic-move {lines: true}
 ```tsx
@@ -86,7 +100,7 @@ const Post  = React.createClass({
 });
 ```
 
-```tsx
+<!-- ```tsx
 class Post extends React.Component {
   constructor(props) {
     super(props);
@@ -111,7 +125,7 @@ class Post extends React.Component {
     );
   }
 }
-```
+``` -->
 
 ```tsx
 function Post(props) {
@@ -170,7 +184,7 @@ layout: center
 
 ---
 layout: image
-image: ./assets/forgetting.jpeg
+image: /assets/forgetting.jpeg
 backgroundSize: 20em 70%
 ---
 
@@ -191,23 +205,49 @@ class: text-center
 
 ---
 
-<img src="./assets/engine1.png" class="max-w-80% max-h-80% object-contain m-x-auto">
+<LightOrDark>
+  <template #dark>
+    <img src="/assets/engine1-l.png" class="max-w-80% max-h-80% object-contain m-x-auto">
+  </template>
+  <template #light>
+    <img src="/assets/engine1.png" class="max-w-80% max-h-80% object-contain m-x-auto">
+  </template>
+</LightOrDark>
 
 ---
 
-<img src="./assets/engine2.png" class="max-w-80% max-h-80% object-contain m-x-auto">
+<LightOrDark>
+  <template #dark>
+    <img src="/assets/engine2-l.png" class="max-w-80% max-h-80% object-contain m-x-auto">
+  </template>
+  <template #light>
+    <img src="/assets/engine2.png" class="max-w-80% max-h-80% object-contain m-x-auto">
+  </template>
+</LightOrDark>
+
+---
+layout: image
+image: /assets/wordpress.png
+backgroundSize: 70%
+backgroundPosition: center
+class: object-contain
+---
+
+<!--
+Powers 43.5% of web?
+-->
 
 ---
 layout: center
 ---
 
-# Rails engine -> "mini app" -> "fullstack module"
+# "mini app" OR "fullstack component"
 
 ---
 disabled: true
 ---
 
-# "Fullstack module"
+# "Fullstack component"
 
 <ul class="mt-10">
   <li v-click> View (template / style) </li>
@@ -248,7 +288,7 @@ export default function PostPage() {
       <h2>{post.title}</h2>
       <p>{post.content}</p>
       <Form method="post">
-        <button type="submit">Like ({likeCount})</button>
+        <button type="submit">Like ({post.likeCount})</button>
       </Form>
     </div>
   );
@@ -271,13 +311,27 @@ layout: center
 layout: center
 ---
 
-# Like this? 🫣<span v-click="1">🙃</span><span v-click="2">🙈</span>
+# Like this? 🤔
 
-````md magic-move {lines: true}
 ```tsx
 export { loader, action, Component as default } from '@rsc-things/post-renderer'
 ```
 
+---
+layout: image
+image: /assets/re-export.png
+backgroundSize: 70%
+backgroundPosition: center
+class: object-contain
+---
+
+---
+layout: center
+---
+
+# But what about overriding things? <span v-click="1">🫣</span>
+
+````md magic-move {lines: true}
 ```tsx
 import { Component } from '@rsc-things/post-renderer'
 export { loader, action } from '@rsc-things/post-renderer'
@@ -287,7 +341,7 @@ export default function Page() {
 
   return (
     <div>
-      <h1>My Container</h1>
+      <h1>My Container for {data.post.title}</h1>
       <Component>
     </div>
   )
@@ -312,7 +366,7 @@ export default function Page() {
 
   return (
     <div>
-      <h1>My Container</h1>
+      <h1>My Container for {data.post.title}</h1>
       <Component>
     </div>
   )
@@ -332,6 +386,8 @@ layout: center
 
 # Abstraction problem?
 
+---
+disabled: true
 ---
 
 # Abstraction problem?
@@ -355,38 +411,45 @@ class: text-center
 layout: center
 ---
 
-<!-- # How would RSC / RSF solve this? -->
-
-````md magic-move {lines: true}
-<!-- ```tsx
-// switched to next syntax
-
-// pages/index.tsx
-export { getServerSideProps, Component as default } from '@rsc-things/post-renderer'
-
-// pages/api/fetch-post/route.ts
-export { apiHandler as default } from '@rsc-thingy/post-render'
-``` -->
-
 ```tsx
 import { PostRender } from '@rsc-things/post-render'
 
-export default function Page() {
-  return <PostRender />
+export default function Page({ params }) {
+  return <PostRender id={params.postId} />
 }
 ```
 
-<!-- ```tsx{5,7}
-import { PostRender } from '@rsc-things/post-render'
+---
+layout: center
+---
 
-export default function Page() {
+```tsx{*|4|12-13|14-16|5-8}
+import { db } from '../db';
+
+export const PostRender = async ({ id }) => {
+  const post = await db.getPostById(id)
+  const action = async () => {
+    'use server'
+    await db.likePost(id)
+  }
+
   return (
-    <Suspense fallback={<h1>Loading...</h1>}>
-      <PostRender />
-    </Suspense>
-  )
+    <div>
+      <h2>{post.title}</h2>
+      <p>{post.content}</p>
+      <form action={action}>
+        <button type="submit">Like ({post.likeCount})</button>
+      </form>
+    </div>
+  );
 }
-``` -->
+```
+
+---
+layout: center
+---
+
+````md magic-move {lines: true}
 
 ```tsx{1,5,7}
 import { PostRender, PostFallback } from '@rsc-things/post-render'
@@ -435,6 +498,29 @@ export default async function Page({params}) {
 ```
 
 ```tsx
+import { PostRender, PostFallback } from '@rsc-things/post-render'
+
+export default async function Page({params}) {
+  const postTitle = await getPost(params.postId)
+  const share = async () => {
+    'use server'
+
+    // do something
+  }
+
+  return (
+    <div>
+      <h1>My title</h1>
+
+      <Suspense fallback={<PostFallback/>}>
+        <PostRender />
+      </Suspense>
+    </div>
+  )
+}
+```
+
+```tsx
 // react-router soon™️ support
 import { PostRender, PostFallback } from '@rsc-things/post-render'
 
@@ -451,9 +537,7 @@ export default function Page() {
     <div>
       <h1>My title</h1>
 
-      <Suspense fallback={<PostFallback/>}>
-        {use(data.post)}
-      </Suspense>
+      {data.post}
     </div>
   )
 }
@@ -464,7 +548,7 @@ export default function Page() {
 layout: center
 ---
 
-# "Ok, cool Fran, but you said packaging"
+# Ok, anything in the wild doing this?
 
 ---
 layout: center
@@ -534,13 +618,17 @@ layout: center
 layout: center
 ---
 
-# How about file uploads?
+# How about file uploads to S3?
+
+<!--
+skaterboy from california
+-->
 
 ---
 layout: center
 ---
 
-```tsx{1-2|3|4-7|5}
+```tsx{*|3|4-7}
 <input
   type="file"
   onChange={async (event) => {
@@ -566,13 +654,39 @@ layout: center
 layout: center
 ---
 
-<img src="./assets/the-what.jpg" class="max-w-80% max-h-80% object-contain m-x-auto">
+<img src="/assets/the-what.jpg" class="max-w-80% max-h-80% object-contain m-x-auto">
 
 ---
 layout: center
 ---
 
-<img src="./assets/stop.png" class="max-w-80% max-h-80% object-contain m-x-auto">
+```tsx{5}
+<input
+  type="file"
+  onChange={async (event) => {
+    const presignedUrl = generatePresignedUrl(
+      process.env.NEXT_PUBLIC_AWS_PRIVATE_KEY, // TODO: Make this secure
+      process.env.NEXT_PUBLIC_AWS_BUCKET
+    )
+    
+    const formData = new FormData();
+    formData.append("file", event.target.value);
+
+    const res = await fetch(presign, {
+      method: "POST",
+      body: formData,
+    });
+
+    setUrl((await res.json())["url"])
+  }}
+/>
+```
+
+---
+layout: center
+---
+
+<img src="/assets/stop.png" class="max-w-80% max-h-80% object-contain m-x-auto">
 
 ---
 layout: center
@@ -590,7 +704,7 @@ export default function Page() {
       <input
         type="file"
         onChange={async (event) => {
-          const presign = await fetch('/api/presigned').then(res => res.text());
+          const presign = await fetch('/api/get-presigned-url').then(res => res.text());
 
           // bla bla send to S3
           const res = await fetch(presign, { method: "POST", body: formData });
@@ -610,9 +724,11 @@ layout: center
 ---
 
 ```tsx
-// /app/api/get-signature/route.ts
+// /app/api/get-presigned-url/route.ts
 export const GET = async () => {
-  // some aws code...
+  // some aws code... to generate a presigned url
+  // safe to use private keys here
+
   // GPT didn't work on the plane when I was writing this demo
 
   return Response.text(`trust-me-bro-this-is-the-url`)
@@ -621,6 +737,7 @@ export const GET = async () => {
 
 ---
 layout: center
+disabled: true
 ---
 
 ```tsx{14-17}
@@ -654,7 +771,13 @@ export default function Page() {
 layout: center
 ---
 
-# Ok, so how do you share easily this?
+# Ok, so how do you share this?
+
+---
+layout: center
+---
+
+`/api/get-presigned-url`
 
 ---
 layout: center
@@ -662,6 +785,11 @@ layout: center
 
 # React Server Actions
 
+<v-click>
+"functions"
+
+... I hate the nameing
+</v-click>
 ---
 layout: center
 ---
@@ -686,9 +814,11 @@ export default function Page() {
 layout: center
 ---
 
-```tsx{*|2,8}
+```tsx{*|4,10}
+'use client'
+
 // uploader.client.tsx
-import { getPresignedUrl } from './action.ts'
+import { getPresignedUrl } from './action.server.ts'
 
 export const Upload = (props) => {
   <input
@@ -709,12 +839,14 @@ export const Upload = (props) => {
 layout: center
 ---
 
-```tsx{2,4|5-8}
-// action.ts
+```tsx{2,4}
+// action.server.ts
 'use server'
 
 export const getPresignedUrl = async () => {
-  // some aws code...
+  // some aws code... to generate a presigned url
+  // safe to use private keys here
+
   // GPT didn't work on the plane when I was writing this demo
 
   return `trust-me-bro-this-is-the-url`
@@ -723,9 +855,10 @@ export const getPresignedUrl = async () => {
 
 ---
 
-# Anything else?
+# More...
 
 <li v-click>Start a stripe checkout session</li>
+<li v-click>Add to cart shopify button</li>
 <li v-click>NPM/GITHUB/... style embeddable badges</li>
 <li v-click>"Embedded apps"</li>
 <li class="pl-8!" v-click>Embedded DB query engine (i.e. blazer for rails)</li>
@@ -736,12 +869,14 @@ export const getPresignedUrl = async () => {
 
 ---
 layout: center
+disabled: true
 ---
 
-# Where / how / why?
+# Where / why?
 
 ---
 layout: center
+disabled: true
 ---
 
 # Where?
@@ -762,39 +897,55 @@ layout: center
 
 ---
 layout: two-cols-header
+layout-class: grid-rows-[15%_85%]!
 ---
 
 # Why?
 
 ::left::
 
-<li v-click="1"> Yes, it's nicer to use </li>
+PROS
 
-<li v-click="3"> Built in streaming SSR </li>
-<li v-click="5"> Nice packaging of actions </li>
-<li v-click="7"> Less hydration </li>
+<li v-click> DX ❤️ </li>
+<li v-click> SSR streaming</li>
+<li v-click> Package server endpoints </li>
+<li v-click> Less hydration / Smaller bundle size </li>
 
 ::right::
 
-<li v-click="2" v-mark.circle.blue="4" v-mark.circle.orange="6" v-mark.red="8">
-  You're alienating a big part of the community
+<v-click>
+CONS
+</v-click>
+
+<!-- <li v-clickv-mark.circle.blue="4" v-mark.circle.orange="6" v-mark.red="8"> -->
+<li v-click>
+  Next.js AppRouter only for now 🥲
 </li>
 
-<div v-click="9" class="absolute bottom-14 left-0 right-0 text-center">
-"Could mostly be done via trpc style mounts / re-exporting actions"
-</div>
-
----
-
-# Problems?
-
-<li v-click>Next only 🥲</li>
-<li v-click>"server functions"??</li>
-<li v-click>"lazy render RSC"</li>
-<li v-click>No framework agnostic utils (navigation, revalidation, caching, ...)</li>
+<li v-click>Not framework agnostic</li>
+<li v-click>Not (meta)framework agnostic</li>
+<li v-click>"Server functions"??</li>
+<li v-click>"Lazy render RSC"</li>
+<!-- <li v-click>No (meta)framework agnostic utils (navigation, revalidation, caching, ...)</li> -->
 
 ---
 layout: center
+class: text-center
 ---
 
-# Great idea, great tech... def not there yet
+# Great idea, great tech... <v-click>def not there yet</v-click>
+
+<v-click>
+
+"Could mostly be done via handler mounts / re-exporting loaders/actions"
+
+</v-click>
+
+---
+layout: center
+class: text-center
+---
+
+# Any questions?
+
+Twitter/GitHub - @Zeko369, Instagram/Strava - Fran Zekan
