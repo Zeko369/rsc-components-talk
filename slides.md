@@ -302,10 +302,10 @@ class: text-center
 
 <LightOrDark>
   <template #dark>
-    <img src="/assets/engine1-l.png" class="max-w-80% max-h-80% object-contain m-x-auto">
+    <img src="/assets/engine1.png" class="max-w-80% max-h-80% object-contain m-x-auto">
   </template>
   <template #light>
-    <img src="/assets/engine1.png" class="max-w-80% max-h-80% object-contain m-x-auto">
+    <img src="/assets/engine1-l.png" class="max-w-80% max-h-80% object-contain m-x-auto">
   </template>
 </LightOrDark>
 
@@ -313,10 +313,10 @@ class: text-center
 
 <LightOrDark>
   <template #dark>
-    <img src="/assets/engine2-l.png" class="max-w-80% max-h-80% object-contain m-x-auto">
+    <img src="/assets/engine2.png" class="max-w-80% max-h-80% object-contain m-x-auto">
   </template>
   <template #light>
-    <img src="/assets/engine2.png" class="max-w-80% max-h-80% object-contain m-x-auto">
+    <img src="/assets/engine2-l.png" class="max-w-80% max-h-80% object-contain m-x-auto">
   </template>
 </LightOrDark>
 
