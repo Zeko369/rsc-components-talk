@@ -9,6 +9,79 @@ drawings:
 mdc: true
 ---
 
+# OpenAuth Stuff
+
+Lil Bro | @thdxr
+
+---
+layout: image
+image: /assets/dax.jpeg
+backgroundSize: 100%
+backgroundPosition: center
+class: object-contain
+---
+
+---
+layout: center
+---
+
+# So... OpenAuth?
+
+---
+layout: center
+---
+
+<li><b>Universal</b>: You can deploy it as a standalone service or embed it into an existing application. It works with any framework or platform.</li>
+<li><b>Self-hosted</b>: It runs entirely on your infrastructure and can be deployed on Node.js, Bun, AWS Lambda, or Cloudflare Workers.</li>
+<li><b>Standards-based</b>: It implements the OAuth 2.0 spec and is based on web standards. So any OAuth client can use it.</li>
+<li><b>Customizable</b>: It comes with prebuilt themeable UI that you can customize or opt out of.</li>
+
+---
+layout: center
+---
+
+# "But do you want your auth data open?"
+
+---
+layout: image
+image: /assets/clerk.png
+backgroundSize: 70%
+backgroundPosition: center
+class: object-contain
+---
+
+---
+layout: image
+image: /assets/clerk2.png
+backgroundSize: 60%
+backgroundPosition: center
+class: object-contain
+---
+
+---
+layout: image
+image: /assets/better.png
+backgroundSize: 100%
+backgroundPosition: center
+class: object-contain
+---
+
+---
+layout: center
+---
+
+# Ha ha ... funny
+
+---
+layout: intro
+---
+
+<span class="line-through">
+
+# OpenAuth
+
+</span>
+
 # RSCs as "shippable" fullstack components
 
 Fran Zekan | @Zeko369
@@ -22,6 +95,28 @@ Fran Zekan | @Zeko369
 <li v-click>Work for Unidy</li>
 
 <li v-click>Do triathlons (see ya'll for the run tomorrow)</li> -->
+
+---
+layout: center
+---
+
+# Engineer from 🇭🇷
+
+---
+layout: image
+image: /assets/me.webp
+backgroundSize: 60%
+backgroundPosition: center
+class: object-contain
+---
+
+---
+layout: image
+image: /assets/unidy.png
+backgroundSize: 100%
+backgroundPosition: center
+class: object-contain
+---
 
 ---
 layout: center
@@ -192,7 +287,7 @@ backgroundSize: 20em 70%
 layout: center
 ---
 
-# What about "server" integrations?
+# "fullstack"?
 
 ---
 layout: center
@@ -201,7 +296,7 @@ class: text-center
 
 # Anyone here a rails/django dev?
 
-(or heard of rails engines / django apps)
+<!-- (or heard of rails engines / django apps) -->
 
 ---
 
@@ -261,7 +356,15 @@ disabled: true
 layout: center
 ---
 
-# Let's do this in react 🔥
+# Cool... can we do this in react?
+
+---
+layout: image
+image: /assets/can.jpg
+backgroundSize: 100%
+backgroundPosition: center
+class: object-contain
+---
 
 ---
 
@@ -299,7 +402,7 @@ export default function PostPage() {
 layout: center
 ---
 
-# Cool right?
+# Epic right?
 
 ---
 layout: center
@@ -896,37 +999,46 @@ layout: center
 # Why?
 
 ---
-layout: two-cols-header
-layout-class: grid-rows-[15%_85%]!
+layout: center
 ---
 
-# Why?
+# Great DX ❤️
 
-::left::
+---
+layout: center
+---
 
-PROS
+# All the RSC goodies
 
-<li v-click> DX ❤️ </li>
-<li v-click> SSR streaming</li>
-<li v-click> Package server endpoints </li>
-<li v-click> Less hydration / Smaller bundle size </li>
+---
+layout: center
+---
 
-::right::
+# But...
 
-<v-click>
-CONS
-</v-click>
+---
+layout: center
+---
 
-<!-- <li v-clickv-mark.circle.blue="4" v-mark.circle.orange="6" v-mark.red="8"> -->
-<li v-click>
-  Next.js AppRouter only for now 🥲
-</li>
+# Next.js only 😞
 
-<li v-click>Not framework agnostic</li>
-<li v-click>Not (meta)framework agnostic</li>
-<li v-click>"Server functions"??</li>
-<li v-click>"Lazy render RSC"</li>
-<!-- <li v-click>No (meta)framework agnostic utils (navigation, revalidation, caching, ...)</li> -->
+---
+layout: center
+---
+
+# Server Functions?
+
+---
+layout: center
+---
+
+# Lazy RSC? 
+
+---
+layout: center
+---
+
+# Generic "redirect" / "cookies" utils
 
 ---
 layout: center
@@ -935,17 +1047,11 @@ class: text-center
 
 # Great idea, great tech... <v-click>def not there yet</v-click>
 
-<v-click>
-
-"Could mostly be done via handler mounts / re-exporting loaders/actions"
-
-</v-click>
-
 ---
 layout: center
 class: text-center
 ---
 
-# Any questions?
+# Thank you!
 
 Twitter/GitHub - @Zeko369, Instagram/Strava - Fran Zekan
